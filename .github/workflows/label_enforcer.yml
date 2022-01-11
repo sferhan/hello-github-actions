@@ -9,7 +9,14 @@ jobs:
   enforce-label:
     runs-on: ubuntu-latest
     steps:
-    - uses: yogevbd/enforce-label-action@2.1.0
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          public_api_views:
+            - '**/code.py'
+    - if: steps.changes.outputs.public_api_views == 'true'
+      uses: yogevbd/enforce-label-action@2.1.0
       with:
         REQUIRED_LABELS_ALL: "checked-everything"
         REQUIRED_LABELS_ALL_DESCRIPTION: "Make sure we have checked everything and once done, add label 'checked-everything' to this PR."
