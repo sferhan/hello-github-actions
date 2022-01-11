@@ -3,8 +3,7 @@ name: All Checked Verifier
 on:
   pull_request:
     types: [labeled, unlabeled, opened, edited, synchronize]
-    paths:
-      - '**/code.py'
+
 jobs:
   enforce-label:
     runs-on: ubuntu-latest
